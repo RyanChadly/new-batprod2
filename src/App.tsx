@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { MainPage } from "./components/main-page/main-page";
+import { mockOrders } from "./mocks/orders";
+import { mockProducts } from "./mocks/products";
+import { mockRessources } from "./mocks/ressources";
+import { useAppDispatch } from "./store/hooks";
+import { addOrders } from "./store/orders-slice";
+import { addProducts } from "./store/products-slice";
+import { addRessources } from "./store/ressources-slice";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(addOrders(mockOrders));
+    dispatch(addRessources(mockRessources));
+    dispatch(addProducts(mockProducts));
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MainPage />
     </div>
   );
 }
