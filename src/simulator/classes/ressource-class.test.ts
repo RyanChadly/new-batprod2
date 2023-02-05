@@ -3,7 +3,6 @@ import {
   RessourceEvent,
   RessourceEventType,
   RessourceType,
-  Task,
 } from "../../utils/types";
 import { mockProducts } from "../../mocks/products";
 import Ressource from "./ressource-class";
@@ -16,12 +15,7 @@ const ressourceExample = {
   capacityL: 100,
   canMixOrders: true,
 };
-const taskExample: Task = {
-  name: "test",
-  minutesPerLitre: 10,
-  minutes: 30,
-  ressourcesTypes: RessourceType.Tank,
-};
+
 const ressourceEvent: RessourceEvent = {
   type: RessourceEventType.Initial,
   id: "1",
