@@ -11,7 +11,9 @@ import {
 } from "antd";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { OrderParams } from "../../utils/types";
-import { addOrder } from "../../store/orders-slice";
+import { addOrder, modifyOrder } from "../../store/orders-slice";
+import { v4 as uuidv4 } from "uuid";
+import dayjs from "dayjs";
 
 interface PropsType {
   open: boolean;
@@ -19,7 +21,7 @@ interface PropsType {
   order?: OrderParams;
 }
 
-export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
+export const OrderDrawer: React.FC<PropsType> = ({ open, close, order }) => {
   const [customerName, setCustomerName] = useState<string | undefined>(
     order?.customer
   );
@@ -43,16 +45,19 @@ export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
   function submitForm() {
     const product = products.find((p) => p.name === productName);
     if (customerName && volumeL && product && start && end) {
-      dispatch(
-        addOrder({
-          id: "1",
-          startTime: JSON.stringify(start),
-          deadline: JSON.stringify(end),
-          customer: customerName,
-          litres: volumeL,
-          product,
-        })
-      );
+      const newOrder = {
+        id: order?.id ?? uuidv4(),
+        startTime: JSON.stringify(start),
+        deadline: JSON.stringify(end),
+        customer: customerName,
+        litres: volumeL,
+        product,
+      };
+      if (order) {
+        dispatch(modifyOrder(newOrder));
+      } else {
+        dispatch(addOrder(newOrder));
+      }
     }
     close();
   }
@@ -65,7 +70,13 @@ export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
   }
 
   return (
-    <Drawer placement="right" onClose={close} open={open}>
+    <Drawer
+      placement="right"
+      onClose={close}
+      open={open}
+      destroyOnClose
+      closable={false}
+    >
       <Form layout="vertical">
         <Form.Item label="Client" name="clientName">
           <Input
@@ -77,6 +88,7 @@ export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
         <Form.Item label="Produit" name="product">
           <Select
             onChange={(e) => setProductName(e)}
+            defaultValue={productName}
             options={products.map((product) => ({
               value: product.name,
               label: product.name,
@@ -88,12 +100,20 @@ export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
           <InputNumber
             onChange={(v) => setVolumeL(v)}
             min={0}
-            defaultValue={0}
+            defaultValue={volumeL ?? 0}
           />
         </Form.Item>
 
         <Form.Item label="Periode" name="timeRange">
           <DatePicker.RangePicker
+            defaultValue={
+              order
+                ? [
+                    dayjs(new Date(JSON.parse(order?.startTime))),
+                    dayjs(new Date(JSON.parse(order?.deadline))),
+                  ]
+                : [dayjs(), dayjs()]
+            }
             onChange={onChangeRange}
             showTime={{ format: "HH:mm" }}
             format="DD-MM-YYYY HH:mm"
