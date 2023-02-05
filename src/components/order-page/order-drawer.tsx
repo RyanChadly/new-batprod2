@@ -9,8 +9,9 @@ import {
   Select,
   Space,
 } from "antd";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { OrderParams } from "../../utils/types";
+import { addOrder } from "../../store/orders-slice";
 
 interface PropsType {
   open: boolean;
@@ -19,31 +20,56 @@ interface PropsType {
 }
 
 export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
-  const [clientName, setClientName] = useState<string | undefined>(undefined);
-  const [productName, setProductName] = useState<string | undefined>(undefined);
-  const [volumeL, setVolumeL] = useState<number | null>(null);
-  const [start, setStart] = useState<Date | undefined>(undefined);
-  const [end, setEnd] = useState<Date | undefined>(undefined);
-
+  const [customerName, setCustomerName] = useState<string | undefined>(
+    order?.customer
+  );
+  const [productName, setProductName] = useState<string | undefined>(
+    order?.product.name
+  );
+  const [volumeL, setVolumeL] = useState<number | null>(order?.litres ?? null);
+  const [start, setStart] = useState<Date | undefined>(
+    order ? new Date(JSON.parse(order.startTime)) : undefined
+  );
+  const [end, setEnd] = useState<Date | undefined>(
+    order ? new Date(JSON.parse(order.deadline)) : undefined
+  );
   const products = useAppSelector((state) => state.products);
+  const dispatch = useAppDispatch();
+
   function cannotSave(): boolean {
-    return !!clientName && !!productName && !!volumeL && !!start && !!end;
+    return !!customerName && !!productName && !!volumeL && !!start && !!end;
   }
-  function onFinish(values: any[]) {
+
+  function submitForm() {
+    const product = products.find((p) => p.name === productName);
+    if (customerName && volumeL && product && start && end) {
+      dispatch(
+        addOrder({
+          id: "1",
+          startTime: JSON.stringify(start),
+          deadline: JSON.stringify(end),
+          customer: customerName,
+          litres: volumeL,
+          product,
+        })
+      );
+    }
     close();
   }
+
   function onChangeRange(e: any) {
     if (e) {
       setStart(e[0].$d);
       setEnd(e[1].$d);
     }
   }
+
   return (
     <Drawer placement="right" onClose={close} open={open}>
-      <Form layout="vertical" onFinish={onFinish}>
+      <Form layout="vertical">
         <Form.Item label="Client" name="clientName">
           <Input
-            onChange={(e) => setClientName(e.target.value)}
+            onChange={(e) => setCustomerName(e.target.value)}
             defaultValue={order ? order.customer : ""}
           />
         </Form.Item>
@@ -77,7 +103,12 @@ export const ProductsDrawer: React.FC<PropsType> = ({ open, close, order }) => {
 
         <Form.Item>
           <Space>
-            <Button type="primary" htmlType="submit" disabled={!cannotSave()}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              onClick={submitForm}
+              disabled={!cannotSave()}
+            >
               Confirmer
             </Button>
             <Button onClick={close}>Annuler</Button>
