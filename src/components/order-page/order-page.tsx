@@ -14,9 +14,11 @@ export const OrderPage = () => {
       <Button
         onClick={() => setOpenDrawer(true)}
         type={"primary"}
-        style={{ position: "fixed" }}
         icon={<PlusOutlined />}
-      ></Button>
+        style={{ marginBottom: 24 }}
+      >
+        Ajouter
+      </Button>
       <OrderDrawer open={openDrawer} close={closeDrawer} />
       {orders.map((order) => (
         <OrderDescription order={order} key={order.id} />

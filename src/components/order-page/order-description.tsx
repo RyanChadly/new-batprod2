@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Descriptions, Divider } from "antd";
 import { useAppDispatch } from "../../store/hooks";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
