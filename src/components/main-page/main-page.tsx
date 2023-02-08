@@ -6,6 +6,8 @@ import { TbBuildingFactory2, TbBottle, TbList } from "react-icons/tb";
 import { SimulatorButton } from "../simulator-button";
 import { ProductPage } from "../product-page/product-page";
 import { OrderPage } from "../order-page/order-page";
+import { CalendarOutlined } from "@ant-design/icons";
+import { CalendarPage } from "../calendar-page/calendar-page";
 
 const { Header, Content, Footer, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -39,6 +41,7 @@ export const MainPage: React.FC = () => {
     getItem("Commandes", "Orders", <TbList />),
     getItem("Ressources", "Ressources", <TbBuildingFactory2 />),
     getItem("Personel", "People", <BsPeople />),
+    getItem("Planning", "Scheduler", <CalendarOutlined />),
   ];
 
   return (
@@ -71,6 +74,7 @@ export const MainPage: React.FC = () => {
           >
             {content === "Products" && <ProductPage />}
             {content === "Orders" && <OrderPage />}
+            {content === "Scheduler" && <CalendarPage />}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>Ryan Chadly ©2023</Footer>
