@@ -1,6 +1,5 @@
 import { RocketOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import React from "react";
 import { simulate } from "../simulator/simulator";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addOrders } from "../store/orders-slice";
