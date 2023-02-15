@@ -10,8 +10,17 @@ const fullShort: Intl.DateTimeFormatOptions = {
   hour: "2-digit",
 };
 
+const timeShort: Intl.DateTimeFormatOptions = {
+  second: "2-digit",
+  minute: "2-digit",
+  hour: "2-digit",
+};
+
 export const getFullShortTime = (date: Date) =>
   date.toLocaleDateString(new Intl.Locale("fr-FR"), fullShort);
+
+export const getShortTime = (date: Date) =>
+  date.toLocaleTimeString(new Intl.Locale("fr-FR"), timeShort);
 
 export const dateMaker = (minutes: number) => new Date(2022, 11, 1, 8, minutes);
 
