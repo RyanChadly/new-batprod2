@@ -11,6 +11,7 @@ export const CalendarPage: React.FC = () => {
     <>
       <Space direction="vertical">
         <DatePicker
+          allowClear={false}
           defaultValue={dayjs(new Date())}
           onChange={(e) => setDate(e)}
         />
