@@ -8,6 +8,7 @@ import { ProductPage } from "../product-page/product-page";
 import { OrderPage } from "../order-page/order-page";
 import { CalendarOutlined } from "@ant-design/icons";
 import { CalendarPage } from "../calendar-page/calendar-page";
+import dayjs from "dayjs";
 
 const { Header, Content, Footer, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -62,7 +63,7 @@ export const MainPage: React.FC = () => {
           }}
         >
           <SimulatorButton />
-          <DatePicker placeholder="" />
+          <DatePicker allowClear={false} defaultValue={dayjs(new Date())} />
         </Header>
         <Content style={{ margin: "24px 16px 0", overflowY: "scroll" }}>
           <div

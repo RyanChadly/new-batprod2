@@ -1,4 +1,3 @@
-import { ConfigProvider, theme } from "antd";
 import React, { useEffect } from "react";
 import { MainPage } from "./components/main-page/main-page";
 import { mockOrders } from "./mocks/orders";
@@ -20,13 +19,7 @@ function App() {
 
   return (
     <div className="App">
-      <ConfigProvider
-        theme={{
-          algorithm: theme.darkAlgorithm,
-        }}
-      >
-        <MainPage />
-      </ConfigProvider>
+      <MainPage />
     </div>
   );
 }

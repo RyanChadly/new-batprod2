@@ -1,4 +1,4 @@
-import { Popover } from "antd";
+import { Divider, Popover } from "antd";
 import { OrderEvent } from "../../simulator/classes/orderEvent-class";
 import { useAppSelector } from "../../store/hooks";
 import { RessourceEvent } from "../../utils/types";
@@ -11,18 +11,37 @@ export const Calendar = () => {
   const hours = [...Array(24).keys()];
   return (
     <div className="calendar-wrapper">
-      <div className="calendar-header">
-        {hours.map((hour) => (
-          <div className={"hour"}>{hour}</div>
+      <div>
+        <div className="hour-label"></div>
+        {orders.map((order) => (
+          <div className="calendar-label" key={order.id}>
+            {order.customer}
+          </div>
+        ))}
+        <Divider style={{ width: "100%" }} />
+        {ressources.map((ressource) => (
+          <div className="calendar-label" key={ressource.name}>
+            {ressource.name}
+          </div>
         ))}
       </div>
-      <div className="calendar-content-wrapper">
-        {orders.map((order) => (
-          <CalendarRow history={order.history} />
-        ))}
-        {ressources.map((ressource) => (
-          <CalendarRow history={ressource.history} />
-        ))}
+      <div className="calendar-right-wrapper">
+        <div className="calendar-header">
+          {hours.map((hour) => (
+            <div key={hour} className={"hour"}>
+              {hour}
+            </div>
+          ))}
+        </div>
+        <div className="calendar-content-wrapper">
+          {orders.map((order) => (
+            <CalendarRow key={order.id} history={order.history} />
+          ))}
+          <Divider style={{ width: "100%" }} />
+          {ressources.map((ressource) => (
+            <CalendarRow key={ressource.name} history={ressource.history} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -49,6 +68,7 @@ const CalendarRow: React.FC<CalendarRowProps> = ({ history }) => {
       {modifiedHistory
         ? modifiedHistory.map((event, index) => (
             <Popover
+              key={event.id}
               content={
                 <div>
                   <div>{`start: ${getShortTime(event.startTime)}`}</div>
@@ -62,15 +82,12 @@ const CalendarRow: React.FC<CalendarRowProps> = ({ history }) => {
                 className="event"
                 style={{
                   transform: `translateX(${event.translation * 2}px)`,
-                  width: `${event.length * 2}px`,
+                  width: `${event.length * 2 - 1}px`,
                   position: "relative",
 
-                  marginRight: `-${event.length * 2}px`,
+                  marginRight: `-${event.length * 2 - 1}px`,
                 }}
-              >
-                {/* <span>{event.startTime.getHours()}</span>
-              <span>{event.startTime.getMinutes()}</span> */}
-              </div>
+              ></div>
             </Popover>
           ))
         : null}
