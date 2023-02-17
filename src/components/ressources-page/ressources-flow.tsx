@@ -11,17 +11,31 @@ import ReactFlow, {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
-
-const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-];
-
-const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
+import { useAppSelector } from "../../store/hooks";
 
 export const RessourcesFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const ressources = useAppSelector((state) => state.ressources);
+  const ressourcesNodes = ressources.map((ress, index) => ({
+    id: ress.name,
+    position: { x: 100 * index, y: 100 * index },
+    data: { label: ress.name },
+  }));
+
+  const ressourcesEdges = ressources
+    .filter((ress) => ress.child)
+    .flatMap((ress) => {
+      const source = ress.name;
+      const targets = ress.child;
+
+      return targets.map((target) => ({
+        id: `e${source}-${target}`,
+        source,
+        target,
+      }));
+    });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [nodes, setNodes, onNodesChange] = useNodesState(ressourcesNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(ressourcesEdges);
 
   const onConnect = useCallback(
     (params: Edge<any> | Connection) => setEdges((eds) => addEdge(params, eds)),
