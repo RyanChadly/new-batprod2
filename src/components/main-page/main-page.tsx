@@ -9,6 +9,7 @@ import { OrderPage } from "../order-page/order-page";
 import { CalendarOutlined } from "@ant-design/icons";
 import { CalendarPage } from "../calendar-page/calendar-page";
 import dayjs from "dayjs";
+import { RessourcesPage } from "../ressources-page/ressources-page";
 
 const { Header, Content, Footer, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -71,11 +72,14 @@ export const MainPage: React.FC = () => {
               padding: 24,
               minHeight: "100%",
               background: colorBgContainer,
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             {content === "Products" && <ProductPage />}
             {content === "Orders" && <OrderPage />}
             {content === "Scheduler" && <CalendarPage />}
+            {content === "Ressources" && <RessourcesPage />}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>Ryan Chadly ©2023</Footer>
