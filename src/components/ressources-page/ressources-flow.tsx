@@ -31,6 +31,7 @@ export const RessourcesFlow = () => {
         id: `e${source}-${target}`,
         source,
         target,
+        animated: true,
       }));
     });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
