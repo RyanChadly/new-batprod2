@@ -14,15 +14,42 @@ export const Calendar = () => {
       <div>
         <div className="hour-label"></div>
         {orders.map((order) => (
-          <div className="calendar-label" key={order.id}>
-            {order.customer}
-          </div>
+          <Popover
+            key={order.id}
+            placement="right"
+            content={
+              <div>
+                <div>{`Volume: ${order.litres}`}</div>
+                <div>{`Produit: ${order.product.name}`}</div>
+                <div>{`Debut: ${getShortTime(
+                  new Date(JSON.parse(order.startTime))
+                )}`}</div>
+                <div>{`Echeance: ${getShortTime(
+                  new Date(JSON.parse(order.deadline))
+                )}`}</div>
+              </div>
+            }
+          >
+            <div className="calendar-label">{order.customer}</div>
+          </Popover>
         ))}
         <Divider style={{ width: "100%" }} />
         {ressources.map((ressource) => (
-          <div className="calendar-label" key={ressource.name}>
-            {ressource.name}
-          </div>
+          <Popover
+            key={ressource.name}
+            placement="right"
+            content={
+              <div>
+                <div>{`Capacite: ${ressource.capacityL}`}</div>
+                <div>{`Type: ${ressource.type}`}</div>
+                <div>{`Melange: ${
+                  ressource.canMixOrders ? "oui" : "non"
+                }`}</div>
+              </div>
+            }
+          >
+            <div className="calendar-label">{ressource.name}</div>
+          </Popover>
         ))}
       </div>
       <div className="calendar-right-wrapper">
@@ -73,7 +100,6 @@ const CalendarRow: React.FC<CalendarRowProps> = ({ history }) => {
                 <div>
                   <div>{`start: ${getShortTime(event.startTime)}`}</div>
                   <div>{`end: ${getShortTime(event.endTime)}`}</div>
-                  <div>{`translation: ${event.translation * 2}`}</div>
                 </div>
               }
               title={event.taskName}
