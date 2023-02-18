@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DatePicker, Layout, Menu, MenuProps, theme } from "antd";
 import "./main-page.css";
-import { BsPeople } from "react-icons/bs";
 import { TbBuildingFactory2, TbBottle, TbList } from "react-icons/tb";
 import { SimulatorButton } from "../simulator-button";
 import { ProductPage } from "../product-page/product-page";
@@ -42,7 +41,6 @@ export const MainPage: React.FC = () => {
     getItem("Produits", "Products", <TbBottle />),
     getItem("Commandes", "Orders", <TbList />),
     getItem("Ressources", "Ressources", <TbBuildingFactory2 />),
-    getItem("Personel", "People", <BsPeople />),
     getItem("Planning", "Scheduler", <CalendarOutlined />),
   ];
 
