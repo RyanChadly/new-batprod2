@@ -52,7 +52,6 @@ export const RessourcesFlow = () => {
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
     >
-      <MiniMap />
       <Controls />
       <Background />
     </ReactFlow>
