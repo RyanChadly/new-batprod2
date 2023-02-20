@@ -2,18 +2,21 @@ import { dateMaker } from "../../utils/utils";
 import {
   RessourceEvent,
   RessourceEventType,
+  RessourceParams,
   RessourceType,
 } from "../../utils/types";
 import { mockProducts } from "../../mocks/products";
 import Ressource from "./ressource-class";
 
-const ressourceExample = {
+const ressourceExample: RessourceParams = {
   name: "Tank1",
   type: RessourceType.Tank,
   parent: [],
   child: ["Pipe1"],
   capacityL: 100,
   canMixOrders: true,
+  xCoord: 1,
+  yCoord: 1,
 };
 
 const ressourceEvent: RessourceEvent = {

@@ -52,6 +52,8 @@ export interface RessourceParams {
   capacityL: number;
   canMixOrders: boolean;
   history?: RessourceEvent[];
+  xCoord: number;
+  yCoord: number;
 }
 
 export enum RessourceEventType {

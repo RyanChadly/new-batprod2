@@ -15,6 +15,8 @@ export default class Ressource {
   child: string[];
   history: RessourceEvent[];
   canMixOrders: boolean;
+  xCoord: number;
+  yCoord: number;
 
   constructor(args: RessourceParams) {
     this.name = args.name;
@@ -24,6 +26,8 @@ export default class Ressource {
     this.capacityL = args.capacityL;
     this.canMixOrders = args.canMixOrders;
     this.history = args.history ?? [];
+    this.xCoord = args.xCoord;
+    this.yCoord = args.yCoord;
   }
 
   /**

@@ -8,6 +8,8 @@ export const mockRessources: RessourceParams[] = [
     child: ["Pipe1"],
     capacityL: 1000,
     canMixOrders: true,
+    xCoord: 0,
+    yCoord: 0,
   },
   {
     name: "Tank2",
@@ -16,6 +18,8 @@ export const mockRessources: RessourceParams[] = [
     child: ["Pipe1"],
     capacityL: 1000,
     canMixOrders: true,
+    xCoord: 500,
+    yCoord: 0,
   },
   {
     name: "Pipe1",
@@ -24,6 +28,8 @@ export const mockRessources: RessourceParams[] = [
     child: ["Pasto1"],
     capacityL: 10,
     canMixOrders: true,
+    xCoord: 250,
+    yCoord: 200,
   },
   {
     name: "Pasto1",
@@ -32,5 +38,7 @@ export const mockRessources: RessourceParams[] = [
     child: [],
     capacityL: 1000,
     canMixOrders: true,
+    xCoord: 250,
+    yCoord: 400,
   },
 ];

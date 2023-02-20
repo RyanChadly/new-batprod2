@@ -16,7 +16,7 @@ export const RessourcesFlow = () => {
   const ressources = useAppSelector((state) => state.ressources);
   const ressourcesNodes = ressources.map((ress, index) => ({
     id: ress.name,
-    position: { x: 100 * index, y: 100 * index },
+    position: { x: ress.xCoord, y: ress.yCoord },
     data: { label: ress.name },
   }));
 
