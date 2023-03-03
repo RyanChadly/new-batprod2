@@ -1,8 +1,7 @@
 import { Divider, Popover } from "antd";
-import { OrderEvent } from "../../simulator/classes/orderEvent-class";
 import { useAppSelector } from "../../store/hooks";
-import { RessourceEvent } from "../../utils/types";
 import { getShortTime } from "../../utils/utils";
+import { CalendarRow } from "./calendar-row";
 import "./calendar.scss";
 
 export const Calendar = () => {
@@ -70,53 +69,6 @@ export const Calendar = () => {
           ))}
         </div>
       </div>
-    </div>
-  );
-};
-
-interface CalendarRowProps {
-  history: OrderEvent[] | RessourceEvent[] | undefined;
-}
-const CalendarRow: React.FC<CalendarRowProps> = ({ history }) => {
-  const modifiedHistory = history?.map((event) => {
-    const totalMinutesUntilStart =
-      event.startTime.getMinutes() + event.startTime.getHours() * 60;
-    const totalMinutesUntilEnd =
-      event.endTime.getMinutes() + event.endTime.getHours() * 60;
-
-    return {
-      translation: totalMinutesUntilStart,
-      length: totalMinutesUntilEnd - totalMinutesUntilStart,
-      ...event,
-    };
-  });
-  return (
-    <div className="calendar-row">
-      {modifiedHistory
-        ? modifiedHistory.map((event, index) => (
-            <Popover
-              key={event.id}
-              content={
-                <div>
-                  <div>{`start: ${getShortTime(event.startTime)}`}</div>
-                  <div>{`end: ${getShortTime(event.endTime)}`}</div>
-                </div>
-              }
-              title={event.taskName}
-            >
-              <div
-                className="event"
-                style={{
-                  transform: `translateX(${event.translation * 2}px)`,
-                  width: `${event.length * 2 - 1}px`,
-                  position: "relative",
-
-                  marginRight: `-${event.length * 2 - 1}px`,
-                }}
-              ></div>
-            </Popover>
-          ))
-        : null}
     </div>
   );
 };
