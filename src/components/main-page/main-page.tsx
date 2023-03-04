@@ -62,7 +62,6 @@ export const MainPage: React.FC = () => {
           }}
         >
           <SimulatorButton />
-          <DatePicker allowClear={false} defaultValue={dayjs(new Date())} />
         </Header>
         <Content style={{ margin: "24px 16px 0", overflowY: "scroll" }}>
           <div
