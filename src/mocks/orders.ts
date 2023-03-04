@@ -6,7 +6,7 @@ export const mockOrders: OrderParams[] = [
     id: "1",
     startTime: JSON.stringify(dateMaker(0)),
     litres: 10,
-    customer: "Du Bide",
+    customer: "Lactalis",
     deadline: JSON.stringify(dateMaker(509)),
     product: {
       name: "Cream",
@@ -38,7 +38,7 @@ export const mockOrders: OrderParams[] = [
     id: "2",
     startTime: JSON.stringify(dateMaker(0)),
     litres: 10,
-    customer: "Du Gros",
+    customer: "Nestle",
     deadline: JSON.stringify(dateMaker(509)),
     product: {
       name: "Milk",
