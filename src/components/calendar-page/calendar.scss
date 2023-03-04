@@ -1,5 +1,5 @@
 .calendar-wrapper {
-  flex: auto;
+  // flex: auto;
   display: flex;
   flex-direction: row;
   height: 100%;
@@ -25,12 +25,10 @@
       width: calc(24 * 120px);
       height: 40px;
       .hour {
-        border-style: solid;
+        border-style: none none solid none;
         border-width: 0.5px;
-        border-radius: 3px;
-        width: 119px;
-        margin-right: 1px;
-
+        border-radius: 6px;
+        width: 120px;
         text-align: center;
       }
     }
@@ -41,11 +39,12 @@
         display: flex;
         flex-direction: row;
         .event {
-          height: 38px;
-          margin-top: 2px;
+          height: 40px;
+          background-color: beige;
+          border-color: chocolate;
           border-style: solid;
-          border-width: 0.5px;
-          border-radius: 3px;
+          border-width: 0.1px;
+          border-radius: 6px;
         }
       }
     }

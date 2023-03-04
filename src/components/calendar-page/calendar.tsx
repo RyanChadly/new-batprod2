@@ -61,11 +61,15 @@ export const Calendar = () => {
         </div>
         <div className="calendar-content-wrapper">
           {orders.map((order) => (
-            <CalendarRow key={order.id} history={order.history} />
+            <CalendarRow key={order.id} history={order.history} hours={hours} />
           ))}
           <Divider style={{ width: "100%" }} />
           {ressources.map((ressource) => (
-            <CalendarRow key={ressource.name} history={ressource.history} />
+            <CalendarRow
+              key={ressource.name}
+              history={ressource.history}
+              hours={hours}
+            />
           ))}
         </div>
       </div>
