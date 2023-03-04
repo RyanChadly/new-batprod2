@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DatePicker, Layout, Menu, MenuProps, theme } from "antd";
+import { Layout, Menu, MenuProps, theme } from "antd";
 import "./main-page.css";
 import { TbBuildingFactory2, TbBottle, TbList } from "react-icons/tb";
 import { SimulatorButton } from "../simulator-button";
@@ -7,7 +7,6 @@ import { ProductPage } from "../product-page/product-page";
 import { OrderPage } from "../order-page/order-page";
 import { CalendarOutlined } from "@ant-design/icons";
 import { CalendarPage } from "../calendar-page/calendar-page";
-import dayjs from "dayjs";
 import { RessourcesPage } from "../ressources-page/ressources-page";
 
 const { Header, Content, Footer, Sider } = Layout;
