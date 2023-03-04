@@ -44,8 +44,7 @@ export const CalendarEvent: React.FC<EventProps> = ({ event }) => {
         style={{
           transform: `translateX(${translation * 2}px)`,
           width: `${length * 2 - 1}px`,
-          position: "relative",
-
+          display: `${length === 0 ? "none" : "block"}`,
           marginRight: `-${length * 2 - 1}px`,
         }}
       ></div>
