@@ -1,6 +1,7 @@
 import { Divider, Popover } from "antd";
 import { useAppSelector } from "../../store/hooks";
 import { getShortTime } from "../../utils/utils";
+import { CalendarHeader } from "./calendar-header";
 import { CalendarRow } from "./calendar-row";
 import "./calendar.scss";
 
@@ -10,7 +11,7 @@ export const Calendar = () => {
   const hours = [...Array(24).keys()];
   return (
     <div className="calendar-wrapper">
-      <div>
+      <div className="calendar-left-wrapper">
         <div className="hour-label"></div>
         {orders.map((order) => (
           <Popover
@@ -52,13 +53,7 @@ export const Calendar = () => {
         ))}
       </div>
       <div className="calendar-right-wrapper">
-        <div className="calendar-header">
-          {hours.map((hour) => (
-            <div key={hour} className={"hour"}>
-              {hour}
-            </div>
-          ))}
-        </div>
+        <CalendarHeader hours={hours} />
         <div className="calendar-content-wrapper">
           {orders.map((order) => (
             <CalendarRow key={order.id} history={order.history} hours={hours} />
